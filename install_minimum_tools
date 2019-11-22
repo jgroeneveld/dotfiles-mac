@@ -1,0 +1,4 @@
+brew install git fasd tig legit
+
+brew install fzf
+$(brew --prefix)/opt/fzf/install

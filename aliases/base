@@ -1,0 +1,29 @@
+alias df="cd ~/dotfiles-mac"
+
+alias ll='ls -lhG'
+alias l='ls -lhG'
+alias lt='ls -lhGrt'
+alias la='ls -lhA'
+alias lat='ls -lhAtr'
+
+alias curlstatus='curl -sL -w "%{http_code} %{url_effective}\\n" -o /dev/null'
+
+curl_time() {
+    curl -so /dev/null -w "\
+   namelookup:  %{time_namelookup}s\n\
+      connect:  %{time_connect}s\n\
+   appconnect:  %{time_appconnect}s\n\
+  pretransfer:  %{time_pretransfer}s\n\
+     redirect:  %{time_redirect}s\n\
+starttransfer:  %{time_starttransfer}s\n\
+-------------------------\n\
+        total:  %{time_total}s\n" "$@"
+}
+
+function code {
+  if [[ $# > 0 ]]; then
+    code $@
+  else
+    code .
+  fi
+}

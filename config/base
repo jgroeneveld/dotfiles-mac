@@ -1,0 +1,8 @@
+# use fasd for quick switching (z for cding, ,path in commands to autocomplete fuzzy: "vim ,sh" -> "vim ~/dotfiles/shared_shell"
+eval "$(fasd --init auto)"
+
+# use fzf for c-r completion
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# ======== Programme ========
+export EDITOR="vim"

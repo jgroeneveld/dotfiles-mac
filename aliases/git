@@ -1,0 +1,70 @@
+# commands:
+
+# ======== GIT ========
+alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --date=iso'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gad='git add --all .'
+alias gco='git checkout'
+alias gp='git push'
+alias gpl='git pull --rebase --autostash'
+
+function g {
+  if [[ $# > 0 ]]; then
+    git $@
+  else
+    git status
+  fi
+}
+
+function gc {
+  if [[ $# > 0 ]]; then
+    echo "[#$1] " > /tmp/git_commit_template
+    git commit -t /tmp/git_commit_template
+  else
+    git commit
+  fi
+}
+
+function gsync {
+  if [[ $(git diff --stat) != '' ]]; then
+    echo '-> Working Tree is dirty\n'
+    git status
+  else
+    echo "-> Pulling\n" && git pull --rebase && echo "\n-> Pushing" && git push
+  fi
+}
+alias gsn=gsync
+
+# -----------------
+# ----- legit ----- https://frostming.github.io/legit/
+# -----------------
+
+# list fuzzy select and return branch name (can be used in scripts)
+alias gb='legit branches | fzf | cut -c3- | cut -d" " -f2'
+
+# Publishes branch to remote server.
+alias gpublish='legit publish'
+
+# Removes branch from remote server.
+alias gunpublish='legit unpublish'
+
+# Removes the last commit from history.
+alias gundo='legit undo'
+
+# switch branch
+function gsw {
+  if [[ $# > 0 ]]; then
+    legit switch $@
+  else
+    legit switch $(gb)
+  fi
+}
+
+# fuzzy (fzf) helper
+# alias gcob='gco $(git branch -a | fzf)'
+# alias gcobt='gco -t $(git branch -a | fzf)'
+# alias gb='git branch -a | fzf'
+
+# -------- git auxilary --------
+alias t='tig status'

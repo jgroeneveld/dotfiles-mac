@@ -1,0 +1,6 @@
+source ~/dotfiles-mac/config/base
+source ~/dotfiles-mac/config/paths
+
+source ~/dotfiles-mac/aliases/base
+source ~/dotfiles-mac/aliases/git
+source ~/dotfiles-mac/aliases/infastructure

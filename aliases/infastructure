@@ -1,0 +1,3 @@
+alias sdo="sudo docker"
+alias k="kubectl"
+alias kx="kubectx"
