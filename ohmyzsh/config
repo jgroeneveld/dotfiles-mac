@@ -1,3 +1,5 @@
+export UPDATE_ZSH_DAYS=90
+
 ZSH_CUSTOM=~/dotfiles-mac/ohmyzsh/custom
 
 ZSH_THEME="jgroeneveld"
