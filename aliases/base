@@ -22,8 +22,8 @@ starttransfer:  %{time_starttransfer}s\n\
 
 function code {
   if [[ $# > 0 ]]; then
-    code $@
+    /usr/local/bin/code $@
   else
-    code .
+    /usr/local/bin/code .
   fi
 }
