@@ -1,7 +1,12 @@
 PROMPT='
 %{$fg[green]%} ➜ '
 # RPS1='%{$fg[blue]%}%~%{$reset_color%} '
-RPS1='%{$fg[grey]%} [%D{%H:%M:%S}] %{$fg[black]%}%2~$(git_prompt_info)%{$reset_color%}'
+
+# white background
+# RPS1='%{$fg[grey]%} [%D{%H:%M:%S}] %{$fg[black]%}%2~$(git_prompt_info)%{$reset_color%}'
+
+# dark background
+RPS1='%{$fg[white]%}%2~$(git_prompt_info)%{$reset_color%}'
 
 # ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[yellow]%}("
 ZSH_THEME_GIT_PROMPT_PREFIX=" "
