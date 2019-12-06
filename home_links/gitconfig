@@ -1,3 +1,5 @@
 [user]
 	name = Jaap Groeneveld
 	email = moin@jgroeneveld.de
+[includeIf "gitdir:~/source/fielmann/"]
+    path = ~/source/fielmann/gitconfig
