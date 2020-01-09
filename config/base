@@ -5,4 +5,5 @@ eval "$(fasd --init auto)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # ======== Programme ========
-export EDITOR="vim"
+# export EDITOR="vim"
+export EDITOR="micro"
