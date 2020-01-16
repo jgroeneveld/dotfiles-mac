@@ -13,7 +13,7 @@
     "Red Component" : 0.74117647058823533
   },
   "Custom Directory" : "No",
-  "Normal Font" : "DejaVuSansCode 14",
+  "Normal Font" : "JetBrainsMono-Regular 14",
   "Bold Color" : {
     "Green Component" : 0.90237069129943848,
     "Blue Component" : 0.90237069129943848,
@@ -91,7 +91,7 @@
   "ASCII Anti Aliased" : true,
   "Non Ascii Font" : "Monaco 12",
   "Vertical Spacing" : 1,
-  "Use Bold Font" : true,
+  "Use Bold Font" : false,
   "Option Key Sends" : 0,
   "Selected Text Color" : {
     "Green Component" : 1,
