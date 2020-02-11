@@ -148,7 +148,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 14.0
+  size: 15.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -578,26 +578,21 @@ key_bindings:
   #- { key: Equals, mods: Command,         action: IncreaseFontSize }
   #- { key: Add,    mods: Command,         action: IncreaseFontSize }
   #- { key: Minus,  mods: Command,         action: DecreaseFontSize }
-  #- { key: K,      mods: Command,         action: ClearHistory     }
-  #- { key: K,      mods: Command,         chars: "\x0c"            }
+  - { key: N,      mods: Command,         action: SpawnNewInstance      }
   #- { key: V,      mods: Command,         action: Paste            }
   #- { key: C,      mods: Command,         action: Copy             }
-  #- { key: H,      mods: Command,         action: Hide             }
+  # - { key: H,      mods: Command,         action: Hide             }
   # unbind cmd+h because https://github.com/jwilm/alacritty/issues/1465
   # - { key: H,      mods: Command,         action: ReceiveChar             }
   #- { key: Q,      mods: Command,         action: Quit             }
   #- { key: W,      mods: Command,         action: Quit             }
-  #- { key: F,      mods: Command|Control, action: ToggleFullscreen }
+  # - { key: F,      mods: Command, action: ToggleFullscreen }
 
   # (iterm like bindings sending escape sequences to tmux splitting)
   # https://arslan.io/2018/02/05/gpu-accelerated-terminal-alacritty/
   - { key: D,        mods: Command,       chars: "\x06\x76" }   
   - { key: D,        mods: Command|Shift, chars: "\x06\x73" }
   - { key: W,        mods: Command,       chars: "\x06\x78" }
-  - { key: H,        mods: Command,       chars: "\x06\x68" }
-  - { key: J,        mods: Command,       chars: "\x06\x6a" }
-  - { key: K,        mods: Command,       chars: "\x06\x6b" }
-  - { key: L,        mods: Command,       chars: "\x06\x6c" }
   - { key: T,        mods: Command,       chars: "\x06\x63" }
   - { key: RBracket, mods: Command|Shift, chars: "\x06\x6e" }
   - { key: LBracket, mods: Command|Shift, chars: "\x06\x70" }
@@ -611,10 +606,33 @@ key_bindings:
   - { key: Key7,     mods: Command,       chars: "\x06\x37" }
   - { key: Key8,     mods: Command,       chars: "\x06\x38" }
   - { key: Key9,     mods: Command,       chars: "\x06\x39" }
-  - { key: Left,     mods: Command,       chars: "\x06\x48" }
-  - { key: Down,     mods: Command,       chars: "\x06\x4a" }
-  - { key: Up,       mods: Command,       chars: "\x06\x4b" }
-  - { key: Right,    mods: Command,       chars: "\x06\x4c" }
+# tmux split moving
+  - { key: H,        mods: Command,       chars: "\x06\x68" }
+  - { key: J,        mods: Command,       chars: "\x06\x6a" }
+  - { key: K,        mods: Command,       chars: "\x06\x6b" }
+  - { key: L,        mods: Command,       chars: "\x06\x6c" }
+  
+  # split size
+  - { key: H,     mods: Command|Shift,       chars: "\x06\x48" }
+  - { key: J,     mods: Command|Shift,       chars: "\x06\x4a" }
+  - { key: K,       mods: Command|Shift,       chars: "\x06\x4b" }
+  - { key: L,    mods: Command|Shift,       chars: "\x06\x4c" }
+
+
+  # mac style moving words
+  - { key: Left,    mods: Alt,       chars: "\x1b[1;5D" }
+  - { key: Right,    mods: Alt,       chars: "\x1b[1;5C" }
+  - { key: Left,     mods: Command,       chars: "\x1b[H" }
+  - { key: Right,       mods: Command,       chars: "\x1b[F" }
+  - { key: Up,     mods: Command,       action: ScrollPageUp }
+  - { key: Down,     mods: Command,       action: ScrollPageDown }
+  # keycodes
+  # beginning of line: \x1b[H
+  # end of line: \x1b[F
+  # word left: \x1b[1;5D
+  # word right: \x1b[1;5C
+
+
 
 
   #- { key: Paste,                    action: Paste                            }
