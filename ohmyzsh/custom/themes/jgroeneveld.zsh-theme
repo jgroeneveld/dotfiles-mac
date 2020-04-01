@@ -1,6 +1,4 @@
-PROMPT='
-%{$fg[green]%} ➜ '
-# RPS1='%{$fg[blue]%}%~%{$reset_color%} '
+PROMPT='%{$fg[green]%} ➜ %{$reset_color%}'
 
 # white background
 # RPS1='%{$fg[grey]%} [%D{%H:%M:%S}] %{$fg[black]%}%2~$(git_prompt_info)%{$reset_color%}'

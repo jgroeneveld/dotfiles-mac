@@ -620,17 +620,18 @@ key_bindings:
 
 
   # mac style moving words
-  - { key: Left,    mods: Alt,       chars: "\x1b[1;5D" }
-  - { key: Right,    mods: Alt,       chars: "\x1b[1;5C" }
+  - { key: Left,        mods: Alt, chars: "\x1bb"}
+  - { key: Right,    mods: Alt,       chars: "\x1bf" }
   - { key: Left,     mods: Command,       chars: "\x1b[H" }
   - { key: Right,       mods: Command,       chars: "\x1b[F" }
   - { key: Up,     mods: Command,       action: ScrollPageUp }
   - { key: Down,     mods: Command,       action: ScrollPageDown }
   # keycodes
+  # \x1b is escape sequence start
   # beginning of line: \x1b[H
   # end of line: \x1b[F
-  # word left: \x1b[1;5D
-  # word right: \x1b[1;5C
+  # word left: \x1bb
+  # word right: \x1bf
 
 
 
