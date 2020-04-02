@@ -1,0 +1,55 @@
+{
+    "editor.smoothScrolling": false,
+    "workbench.colorTheme": "Hop Light",
+    "workbench.colorCustomizations": {},
+    "window.zoomLevel": 0,
+    "explorer.confirmDragAndDrop": false,
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.format.enable": true,
+    "[go]": {
+        "editor.snippetSuggestions": "none",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+        },
+        "editor.tabSize": 4
+    },
+    "go.lintTool": "golangci-lint",
+    "go.lintFlags": [
+        "--fast"
+    ],
+    "gopls": {
+        "usePlaceholders": true, // add parameter placeholders when completing a function
+        // Experimental settings
+        "completeUnimported": true, // autocomplete unimported packages
+        "deepCompletion": true, // enable deep completion
+    },
+    "editor.minimap.enabled": false,
+    "editor.renderIndentGuides": false,
+    "editor.renderLineHighlight": "gutter",
+    "editor.folding": false,
+    "editor.glyphMargin": false,
+    "explorer.openEditors.visible": 0,
+    "workbench.activityBar.visible": false,
+    "workbench.editor.tabCloseButton": "off",
+    "workbench.statusBar.visible": false,
+    "editor.matchBrackets": false,
+    "indenticator.color.dark": "rgba(255,255,255,.1)",
+    "indenticator.color.light": "rgba(255,255,255,.4)",
+    "breadcrumbs.enabled": true,
+    "editor.fontFamily": "Jetbrains Mono",
+    "editor.fontLigatures": true,
+    "diffEditor.renderSideBySide": true,
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.overviewRulerBorder": false,
+    "workbench.iconTheme": "simple-icons",
+    "editor.fontSize": 15,
+    "workbench.editor.showTabs": true,
+    "[vue]": {
+        "editor.defaultFormatter": "octref.vetur"
+    }
+}

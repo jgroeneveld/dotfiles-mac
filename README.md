@@ -8,6 +8,10 @@
 4. Run `./install_minimum_tools`
 5. Run `./init_home_links`
 
+## Mac Apps
+
+See [README-apps.md](README-apps.md)
+
 ## Used Tools
 
 ### fasd
