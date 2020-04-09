@@ -7,6 +7,7 @@
 - `1password` password manager
 - `alacritty` terminal
 - `alfred` search
+- `easy-move-plus-resize` [move/resize window with modifier](https://github.com/dmarcotte/easy-move-resize)
 
 **Other ways**
 
