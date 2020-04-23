@@ -12,6 +12,7 @@
 **Other ways**
 
 - magnet - window management
+- hazeover - dim windows
 - steermouse - mouse settings (import misc config/smsetting_app file)
 - vscode - editor (import misc config/vscode)
 
