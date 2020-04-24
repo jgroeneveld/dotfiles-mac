@@ -8,6 +8,8 @@
 - `alacritty` terminal
 - `alfred` search
 - `easy-move-plus-resize` [move/resize window with modifier](https://github.com/dmarcotte/easy-move-resize)
+- `hammerspoon` desktop automation. see ./home_links/hammerspoon for config
+
 
 **Other ways**
 
