@@ -6,7 +6,7 @@ Install=spoon.SpoonInstall
 -- Magnet replacement bindings
 
 hs.hotkey.bind({"ctrl", "alt"}, "return", function()
-  -- size focused window to size of desktop
+  -- size focused window to size of desktop 
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -138,7 +138,15 @@ hs.hotkey.bind({"ctrl", "alt", "cmd"}, "c", function()
 end)
 
 
-hs.urlevent.bind("moveAndZoom_1of5_Right", function(eventName, params)
-  moveAndZoom_1of5_Right()
-  hs.alert.show("Done moving")
+hs.urlevent.bind("window1920x1080", function(eventName, params)
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local frame = screen:frame()
+
+  f.x = frame.x + frame.w/2 - 1920/2
+  f.y = frame.y + frame.h/2 - 1080/2
+  f.w = 1920
+  f.h = 1080
+  win:setFrame(f)
 end)
