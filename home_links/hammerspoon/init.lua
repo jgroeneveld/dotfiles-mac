@@ -34,159 +34,78 @@ spoon.MicMute:bindHotkeys(
 
 
 
-
 -- -----------------------------------------
--- Magnet: General
+-- WindowManager
 -- -----------------------------------------
 
-hs.hotkey.bind({"ctrl", "alt"}, "return", function()
-  -- size focused window to size of desktop 
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
+wmModsDefault = {"ctrl", "alt"}
+wmModsAlt = {"ctrl", "alt", "cmd"}
+hs.grid.setMargins("8,8")
+hs.window.animationDuration = 0.1
 
-  f.x = max.x
-  f.y = max.y
-  f.w = max.w
-  f.h = max.h
-  win:setFrame(f)
-end)
-
-
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "F", function()
-  -- toggle the focused window to full screen (workspace)
-  local win = hs.window.focusedWindow()
-  win:setFullScreen(not win:isFullScreen())
-end)
-
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "right", function()
-  -- move the focused window one display to the right
-  local win = hs.window.focusedWindow()
-  win:moveOneScreenEast()
-end)
-
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "left", function()
-  -- move the focused window one display to the left
-  local win = hs.window.focusedWindow()
-  win:moveOneScreenWest()
-end)
-
--- args{columns, rows, left, top, width, height}
-local function moveAndZoomGrid(args)
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local frame = screen:frame()
-  local colSize = frame.w/args.columns
-  local rowSize = frame.h/args.rows
-
-  f.x = frame.x + args.left * colSize
-  f.y = frame.y + args.top * rowSize
-  f.w = colSize * args.width
-  f.h = rowSize * args.height
-  win:setFrame(f)
+function getWin()
+  return hs.window.focusedWindow()
 end
 
--- args{columns, left, width}
-local function moveAndZoomColumns(args)
-  moveAndZoomGrid{columns=args.columns, left=args.left, width=args.width, rows=1, top=0, height=1}
+function setGrid(gridSize, cell)
+  hs.grid.setGrid(gridSize)
+  hs.grid.set(getWin(), cell)
 end
 
+function setGridFn(gridSize, cell) return function() setGrid(gridSize, cell) end end
 
+function alignAllToGrid()
+  hs.grid.setGrid('3x2')
+  hs.fnutils.each(hs.window.visibleWindows(), function(win) 
+      hs.grid.snap(win)
+  end)
+end
 
--- -----------------------------------------
--- Magnet: Gridsize 1/2
--- -----------------------------------------
+-- WindowManager: General 
 
-hs.hotkey.bind({"ctrl", "alt"}, "left", function()
-  moveAndZoomColumns{columns=2, left=0, width=1}
-end)
+hs.hotkey.bind(wmModsDefault, "return", function() hs.grid.maximizeWindow() end)
+hs.hotkey.bind(wmModsDefault, "delete", function() alignAllToGrid() end)
+hs.hotkey.bind(wmModsDefault, "space", function() local win = getWin(); win:moveToScreen(win:screen():next()) end)
+hs.hotkey.bind(wmModsAlt, "left", function() getWin():moveOneScreenWest() end)
+hs.hotkey.bind(wmModsAlt, "right", function() getWin():moveOneScreenEast() end)
 
+-- WindowManager: 2x2 Grid
 
-hs.hotkey.bind({"ctrl", "alt"}, "right", function()
-  moveAndZoomColumns{columns=2, left=1, width=1}
-end)
+hs.hotkey.bind(wmModsDefault, "left", setGridFn('2x2', {0, 0, 1, 2}))
+hs.hotkey.bind(wmModsDefault, "right", setGridFn('2x2', {1, 0, 1, 2}))
 
+-- WindowManager: 3x2 Grid
 
+hs.hotkey.bind(wmModsDefault, "q", setGridFn('3x2', {0, 0, 1, 1}))
+hs.hotkey.bind(wmModsDefault, "a", setGridFn('3x2', {0, 0, 1, 3}))
+hs.hotkey.bind(wmModsDefault, "z", setGridFn('3x2', {0, 2, 1, 1}))
 
--- -----------------------------------------
--- Magnet: Gridsize 1/3
--- -----------------------------------------
+hs.hotkey.bind(wmModsDefault, "w", setGridFn('3x2', {1, 0, 1, 1}))
+hs.hotkey.bind(wmModsDefault, "s", setGridFn('3x2', {1, 0, 1, 3}))
+hs.hotkey.bind(wmModsDefault, "x", setGridFn('3x2', {1, 2, 1, 1}))
 
-hs.hotkey.bind({"ctrl", "alt"}, "a", function()
-  moveAndZoomColumns{columns=3, left=0, width=1}
-end)
+hs.hotkey.bind(wmModsDefault, "e", setGridFn('3x2', {2, 0, 1, 1}))
+hs.hotkey.bind(wmModsDefault, "d", setGridFn('3x2', {2, 0, 1, 3}))
+hs.hotkey.bind(wmModsDefault, "c", setGridFn('3x2', {2, 2, 1, 1}))
 
-hs.hotkey.bind({"ctrl", "alt"}, "s", function()
-  moveAndZoomColumns{columns=3, left=1, width=1}
-end)
+-- WindowManager: 5x2 Grid
 
-hs.hotkey.bind({"ctrl", "alt"}, "d", function()
-  moveAndZoomColumns{columns=3, left=2, width=1}
-end)
+hs.hotkey.bind(wmModsAlt, "q", setGridFn('5x2', { 0, 0, 1, 1}))
+hs.hotkey.bind(wmModsAlt, "a", setGridFn('5x2', { 0, 0, 1, 3}))
+hs.hotkey.bind(wmModsAlt, "z", setGridFn('5x2', { 0, 2, 1, 1}))
 
-hs.hotkey.bind({"ctrl", "alt"}, "q", function()
-  moveAndZoomGrid{columns=3, rows=2, left=0, top=0, width=1, height=1}
-end)
+hs.hotkey.bind(wmModsAlt, "w", setGridFn('5x2', { 1, 0, 3, 1}))
+hs.hotkey.bind(wmModsAlt, "s", setGridFn('5x2', { 1, 0, 3, 3}))
+hs.hotkey.bind(wmModsAlt, "x", setGridFn('5x2', { 1, 2, 3, 1}))
 
-hs.hotkey.bind({"ctrl", "alt"}, "z", function()
-  moveAndZoomGrid{columns=3, rows=2, left=0, top=1, width=1, height=1}
-end)
+hs.hotkey.bind(wmModsAlt, "e", setGridFn('5x2', { 4, 0, 1, 1}))
+hs.hotkey.bind(wmModsAlt, "d", setGridFn('5x2', { 4, 0, 1, 3}))
+hs.hotkey.bind(wmModsAlt, "c", setGridFn('5x2', { 4, 2, 1, 1}))
 
-
-hs.hotkey.bind({"ctrl", "alt"}, "e", function()
-  moveAndZoomGrid{columns=3, rows=2, left=2, top=0, width=1, height=1}
-end)
-
-hs.hotkey.bind({"ctrl", "alt"}, "c", function()
-  moveAndZoomGrid{columns=3, rows=2, left=2, top=1, width=1, height=1}
-end)
-
-
-
-
--- -----------------------------------------
--- Magnet: Gridsize 1/5
--- -----------------------------------------
-
-hs.hotkey.bind({"ctrl", "alt", "cmd"}, "a", function()
-  moveAndZoomColumns{columns=5, left=0, width=1}
-end)
-
-hs.hotkey.bind({"ctrl", "alt", "cmd"}, "s", function()
-  moveAndZoomColumns{columns=5, left=1, width=3}
-end)
-
-hs.hotkey.bind({"ctrl", "alt", "cmd"}, "d", function()
-  moveAndZoomColumns{columns=5, left=4, width=1}
-end)
-
-hs.hotkey.bind({"ctrl", "alt", "cmd"}, "q", function()
-  moveAndZoomGrid{columns=5, rows=2, left=0, top=0, width=1, height=1}
-end)
-
-hs.hotkey.bind({"ctrl", "alt", "cmd"}, "z", function()
-  moveAndZoomGrid{columns=5, rows=2, left=0, top=1, width=1, height=1}
-end)
-
-hs.hotkey.bind({"ctrl", "alt", "cmd"}, "e", function()
-  moveAndZoomGrid{columns=5, rows=2, left=4, top=0, width=1, height=1}
-end)
-
-hs.hotkey.bind({"ctrl", "alt", "cmd"}, "c", function()
-  moveAndZoomGrid{columns=5, rows=2, left=4, top=1, width=1, height=1}
-end)
-
-
-
-
--- -----------------------------------------
--- Magnet: Special window sizes
--- -----------------------------------------
+-- -- WindowManager: Special window sizes
 
 hs.urlevent.bind("window1920x1080", function(eventName, params)
-  local win = hs.window.focusedWindow()
+  local win = getWin()
   local f = win:frame()
   local screen = win:screen()
   local frame = screen:frame()
