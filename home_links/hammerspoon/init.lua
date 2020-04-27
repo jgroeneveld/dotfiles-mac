@@ -119,19 +119,19 @@ hs.hotkey.bind(windowsDefault, "e", setGrid('3x2', {2, 0, 1, 1}))
 hs.hotkey.bind(windowsDefault, "d", setGrid('3x2', {2, 0, 1, 3}))
 hs.hotkey.bind(windowsDefault, "c", setGrid('3x2', {2, 2, 1, 1}))
 
--- WindowManager: 5x2 Grid
+-- WindowManager: 7x2 Grid
 
-hs.hotkey.bind(windowsAlt, "q", setGrid('5x2', { 0, 0, 1, 1}))
-hs.hotkey.bind(windowsAlt, "a", setGrid('5x2', { 0, 0, 1, 3}))
-hs.hotkey.bind(windowsAlt, "z", setGrid('5x2', { 0, 2, 1, 1}))
+hs.hotkey.bind(windowsAlt, "q", setGrid('7x2', { 0, 0, 2, 1}))
+hs.hotkey.bind(windowsAlt, "a", setGrid('7x2', { 0, 0, 2, 3}))
+hs.hotkey.bind(windowsAlt, "z", setGrid('7x2', { 0, 2, 2, 1}))
 
-hs.hotkey.bind(windowsAlt, "w", setGrid('5x2', { 1, 0, 3, 1}))
-hs.hotkey.bind(windowsAlt, "s", setGrid('5x2', { 1, 0, 3, 3}))
-hs.hotkey.bind(windowsAlt, "x", setGrid('5x2', { 1, 2, 3, 1}))
+hs.hotkey.bind(windowsAlt, "w", setGrid('7x2', { 2, 0, 3, 1}))
+hs.hotkey.bind(windowsAlt, "s", setGrid('7x2', { 2, 0, 3, 3}))
+hs.hotkey.bind(windowsAlt, "x", setGrid('7x2', { 2, 2, 3, 1}))
 
-hs.hotkey.bind(windowsAlt, "e", setGrid('5x2', { 4, 0, 1, 1}))
-hs.hotkey.bind(windowsAlt, "d", setGrid('5x2', { 4, 0, 1, 3}))
-hs.hotkey.bind(windowsAlt, "c", setGrid('5x2', { 4, 2, 1, 1}))
+hs.hotkey.bind(windowsAlt, "e", setGrid('7x2', { 5, 0, 2, 1}))
+hs.hotkey.bind(windowsAlt, "d", setGrid('7x2', { 5, 0, 2, 3}))
+hs.hotkey.bind(windowsAlt, "c", setGrid('7x2', { 5, 2, 2, 1}))
 
 -- WindowManager: Special window sizes
 
