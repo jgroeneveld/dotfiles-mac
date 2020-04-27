@@ -5,6 +5,16 @@ Install=spoon.SpoonInstall
 
 
 
+-- -----------------------------------------
+-- Hyper Keys
+-- -----------------------------------------
+
+appLauncher = {"ctrl", "cmd"}
+windowsDefault = {"ctrl", "alt"}
+windowsAlt = {"ctrl", "alt", "cmd"}
+
+
+
 
 
 
@@ -34,12 +44,31 @@ spoon.MicMute:bindHotkeys(
 
 
 
+
+-- -----------------------------------------
+-- App Launcher
+-- -----------------------------------------
+
+local function showOrLaunchApp(name)
+  return function()
+    hs.application.launchOrFocus(name)
+  end
+end
+
+hs.hotkey.bind(appLauncher, "s", showOrLaunchApp("Google Chrome"))
+hs.hotkey.bind(appLauncher, "e", showOrLaunchApp("Visual Studio Code"))
+hs.hotkey.bind(appLauncher, "c", showOrLaunchApp("Alacritty"))
+
+
+
+
+
+
 -- -----------------------------------------
 -- WindowManager
 -- -----------------------------------------
 
-wmModsDefault = {"ctrl", "alt"}
-wmModsAlt = {"ctrl", "alt", "cmd"}
+
 hs.grid.setMargins("8,8")
 hs.window.animationDuration = 0.1
 
@@ -47,62 +76,64 @@ function getWin()
   return hs.window.focusedWindow()
 end
 
-function setGrid(gridSize, cell)
-  hs.grid.setGrid(gridSize)
-  hs.grid.set(getWin(), cell)
+function setGrid(gridSize, cell) 
+  return function() 
+    hs.grid.setGrid(gridSize)
+    hs.grid.set(getWin(), cell)
+  end
 end
 
-function setGridFn(gridSize, cell) return function() setGrid(gridSize, cell) end end
-
 function alignAllToGrid()
-  hs.grid.setGrid('3x2')
-  hs.fnutils.each(hs.window.visibleWindows(), function(win) 
-      hs.grid.snap(win)
-  end)
+  return function()
+    hs.grid.setGrid('3x2')
+    hs.fnutils.each(hs.window.visibleWindows(), function(win) 
+        hs.grid.snap(win)
+    end)
+  end
 end
 
 -- WindowManager: General 
 
-hs.hotkey.bind(wmModsDefault, "return", function() hs.grid.maximizeWindow() end)
-hs.hotkey.bind(wmModsDefault, "delete", function() alignAllToGrid() end)
-hs.hotkey.bind(wmModsDefault, "space", function() local win = getWin(); win:moveToScreen(win:screen():next()) end)
-hs.hotkey.bind(wmModsAlt, "left", function() getWin():moveOneScreenWest() end)
-hs.hotkey.bind(wmModsAlt, "right", function() getWin():moveOneScreenEast() end)
+hs.hotkey.bind(windowsDefault, "return", function() hs.grid.maximizeWindow() end)
+hs.hotkey.bind(windowsDefault, "delete", alignAllToGrid())
+hs.hotkey.bind(windowsDefault, "space", function() local win = getWin(); win:moveToScreen(win:screen():next()) end)
+hs.hotkey.bind(windowsAlt, "left", function() getWin():moveOneScreenWest() end)
+hs.hotkey.bind(windowsAlt, "right", function() getWin():moveOneScreenEast() end)
 
 -- WindowManager: 2x2 Grid
 
-hs.hotkey.bind(wmModsDefault, "left", setGridFn('2x2', {0, 0, 1, 2}))
-hs.hotkey.bind(wmModsDefault, "right", setGridFn('2x2', {1, 0, 1, 2}))
+hs.hotkey.bind(windowsDefault, "left", setGrid('2x2', {0, 0, 1, 2}))
+hs.hotkey.bind(windowsDefault, "right", setGrid('2x2', {1, 0, 1, 2}))
 
 -- WindowManager: 3x2 Grid
 
-hs.hotkey.bind(wmModsDefault, "q", setGridFn('3x2', {0, 0, 1, 1}))
-hs.hotkey.bind(wmModsDefault, "a", setGridFn('3x2', {0, 0, 1, 3}))
-hs.hotkey.bind(wmModsDefault, "z", setGridFn('3x2', {0, 2, 1, 1}))
+hs.hotkey.bind(windowsDefault, "q", setGrid('3x2', {0, 0, 1, 1}))
+hs.hotkey.bind(windowsDefault, "a", setGrid('3x2', {0, 0, 1, 3}))
+hs.hotkey.bind(windowsDefault, "z", setGrid('3x2', {0, 2, 1, 1}))
 
-hs.hotkey.bind(wmModsDefault, "w", setGridFn('3x2', {1, 0, 1, 1}))
-hs.hotkey.bind(wmModsDefault, "s", setGridFn('3x2', {1, 0, 1, 3}))
-hs.hotkey.bind(wmModsDefault, "x", setGridFn('3x2', {1, 2, 1, 1}))
+hs.hotkey.bind(windowsDefault, "w", setGrid('3x2', {1, 0, 1, 1}))
+hs.hotkey.bind(windowsDefault, "s", setGrid('3x2', {1, 0, 1, 3}))
+hs.hotkey.bind(windowsDefault, "x", setGrid('3x2', {1, 2, 1, 1}))
 
-hs.hotkey.bind(wmModsDefault, "e", setGridFn('3x2', {2, 0, 1, 1}))
-hs.hotkey.bind(wmModsDefault, "d", setGridFn('3x2', {2, 0, 1, 3}))
-hs.hotkey.bind(wmModsDefault, "c", setGridFn('3x2', {2, 2, 1, 1}))
+hs.hotkey.bind(windowsDefault, "e", setGrid('3x2', {2, 0, 1, 1}))
+hs.hotkey.bind(windowsDefault, "d", setGrid('3x2', {2, 0, 1, 3}))
+hs.hotkey.bind(windowsDefault, "c", setGrid('3x2', {2, 2, 1, 1}))
 
 -- WindowManager: 5x2 Grid
 
-hs.hotkey.bind(wmModsAlt, "q", setGridFn('5x2', { 0, 0, 1, 1}))
-hs.hotkey.bind(wmModsAlt, "a", setGridFn('5x2', { 0, 0, 1, 3}))
-hs.hotkey.bind(wmModsAlt, "z", setGridFn('5x2', { 0, 2, 1, 1}))
+hs.hotkey.bind(windowsAlt, "q", setGrid('5x2', { 0, 0, 1, 1}))
+hs.hotkey.bind(windowsAlt, "a", setGrid('5x2', { 0, 0, 1, 3}))
+hs.hotkey.bind(windowsAlt, "z", setGrid('5x2', { 0, 2, 1, 1}))
 
-hs.hotkey.bind(wmModsAlt, "w", setGridFn('5x2', { 1, 0, 3, 1}))
-hs.hotkey.bind(wmModsAlt, "s", setGridFn('5x2', { 1, 0, 3, 3}))
-hs.hotkey.bind(wmModsAlt, "x", setGridFn('5x2', { 1, 2, 3, 1}))
+hs.hotkey.bind(windowsAlt, "w", setGrid('5x2', { 1, 0, 3, 1}))
+hs.hotkey.bind(windowsAlt, "s", setGrid('5x2', { 1, 0, 3, 3}))
+hs.hotkey.bind(windowsAlt, "x", setGrid('5x2', { 1, 2, 3, 1}))
 
-hs.hotkey.bind(wmModsAlt, "e", setGridFn('5x2', { 4, 0, 1, 1}))
-hs.hotkey.bind(wmModsAlt, "d", setGridFn('5x2', { 4, 0, 1, 3}))
-hs.hotkey.bind(wmModsAlt, "c", setGridFn('5x2', { 4, 2, 1, 1}))
+hs.hotkey.bind(windowsAlt, "e", setGrid('5x2', { 4, 0, 1, 1}))
+hs.hotkey.bind(windowsAlt, "d", setGrid('5x2', { 4, 0, 1, 3}))
+hs.hotkey.bind(windowsAlt, "c", setGrid('5x2', { 4, 2, 1, 1}))
 
--- -- WindowManager: Special window sizes
+-- WindowManager: Special window sizes
 
 hs.urlevent.bind("window1920x1080", function(eventName, params)
   local win = getWin()
@@ -116,3 +147,4 @@ hs.urlevent.bind("window1920x1080", function(eventName, params)
   f.h = 1080
   win:setFrame(f)
 end)
+
