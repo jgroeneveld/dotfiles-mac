@@ -1,23 +1,21 @@
 # Mac Apps
 
-## Essential
+- `appname` = install via `brew cask install`
+- appname - install via download / appstore
 
-**Via cask**
+## Essential
 
 - `1password` password manager
 - `alacritty` terminal
+- vscode - editor (import misc config/vscode)
+
+** Desktop automation **
+
 - `alfred` search
-- `easy-move-plus-resize` [move/resize window with modifier](https://github.com/dmarcotte/easy-move-resize)
 - `hammerspoon` desktop automation. see ./home_links/hammerspoon for config
-
-
-**Other ways**
-
-- magnet - window management
-- hazeover - dim windows
+- `easy-move-plus-resize` [move/resize window with modifier](https://github.com/dmarcotte/easy-move-resize)
 - quickshade - dim full screen for external display
 - steermouse - mouse settings (import misc config/smsetting_app file)
-- vscode - editor (import misc config/vscode)
 
 ## Secondary
 
@@ -29,5 +27,8 @@
 - `adobe-creative-cloud`
 - `docker`
 
-## On a side note
 
+## Old ones
+
+- magnet - window managemt (replaced with hammerspoon)
+- hazeover - dim windows (replaced with hammerspoon)

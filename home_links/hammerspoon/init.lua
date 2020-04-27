@@ -3,7 +3,41 @@ spoon.SpoonInstall.use_syncinstall = true
 Install=spoon.SpoonInstall
 
 
--- Magnet replacement bindings
+
+
+
+
+
+-- -----------------------------------------
+-- Reduce screen brightness if needed
+-- -----------------------------------------
+
+Install:andUse('Shade')
+
+
+
+
+
+-- -----------------------------------------
+-- MicMute
+-- -----------------------------------------
+
+Install:andUse('MicMute')
+spoon.MicMute:bindHotkeys(
+  {
+    toggle = {{"cmd", "alt"}, "m"}
+  },
+  0.75
+)
+
+
+
+
+
+
+-- -----------------------------------------
+-- Magnet: General
+-- -----------------------------------------
 
 hs.hotkey.bind({"ctrl", "alt"}, "return", function()
   -- size focused window to size of desktop 
@@ -59,9 +93,11 @@ local function moveAndZoomColumns(args)
   moveAndZoomGrid{columns=args.columns, left=args.left, width=args.width, rows=1, top=0, height=1}
 end
 
--- ========================
--- ===== Gridsize 1/2 =====
--- ========================
+
+
+-- -----------------------------------------
+-- Magnet: Gridsize 1/2
+-- -----------------------------------------
 
 hs.hotkey.bind({"ctrl", "alt"}, "left", function()
   moveAndZoomColumns{columns=2, left=0, width=1}
@@ -72,9 +108,11 @@ hs.hotkey.bind({"ctrl", "alt"}, "right", function()
   moveAndZoomColumns{columns=2, left=1, width=1}
 end)
 
--- ========================
--- ===== Gridsize 1/3 =====
--- ========================
+
+
+-- -----------------------------------------
+-- Magnet: Gridsize 1/3
+-- -----------------------------------------
 
 hs.hotkey.bind({"ctrl", "alt"}, "a", function()
   moveAndZoomColumns{columns=3, left=0, width=1}
@@ -105,9 +143,12 @@ hs.hotkey.bind({"ctrl", "alt"}, "c", function()
   moveAndZoomGrid{columns=3, rows=2, left=2, top=1, width=1, height=1}
 end)
 
--- ========================
--- ===== Gridsize 1/5 =====
--- ========================
+
+
+
+-- -----------------------------------------
+-- Magnet: Gridsize 1/5
+-- -----------------------------------------
 
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "a", function()
   moveAndZoomColumns{columns=5, left=0, width=1}
@@ -137,6 +178,12 @@ hs.hotkey.bind({"ctrl", "alt", "cmd"}, "c", function()
   moveAndZoomGrid{columns=5, rows=2, left=4, top=1, width=1, height=1}
 end)
 
+
+
+
+-- -----------------------------------------
+-- Magnet: Special window sizes
+-- -----------------------------------------
 
 hs.urlevent.bind("window1920x1080", function(eventName, params)
   local win = hs.window.focusedWindow()
