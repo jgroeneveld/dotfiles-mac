@@ -7,3 +7,5 @@ eval "$(fasd --init auto)"
 # ======== Programme ========
 # export EDITOR="vim"
 export EDITOR="micro"
+
+export JAVA_HOME=`/usr/libexec/java_home -v 11`

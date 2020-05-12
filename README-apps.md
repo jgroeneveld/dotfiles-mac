@@ -16,9 +16,10 @@
 - `easy-move-plus-resize` [move/resize window with modifier](https://github.com/dmarcotte/easy-move-resize)
 - quickshade - dim full screen for external display
 - steermouse - mouse settings (import misc config/smsetting_app file)
+- hazeover - dim windows (replaced with hammerspoon)
 
 ## Secondary
-
+ 
 **Via Cask**
 
 - `dropbox`
@@ -31,4 +32,3 @@
 ## Old ones
 
 - magnet - window managemt (replaced with hammerspoon)
-- hazeover - dim windows (replaced with hammerspoon)

@@ -3,6 +3,8 @@ spoon.SpoonInstall.use_syncinstall = true
 Install=spoon.SpoonInstall
 
 
+require("spotifymenubar")
+
 
 
 -- -----------------------------------------
@@ -85,7 +87,7 @@ end
 
 function alignAllToGrid()
   return function()
-    hs.grid.setGrid('3x2')
+    hs.grid.setGrid('7x2')
     hs.fnutils.each(hs.window.visibleWindows(), function(win) 
         hs.grid.snap(win)
     end)
