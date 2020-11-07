@@ -1,3 +1,5 @@
+#!/bin/sh
+
 brew install git fasd tig legit
 
 brew install fzf

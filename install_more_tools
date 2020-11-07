@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# gron: make json grepable - https://github.com/tomnomnom/gron
+brew install gron
+echo "gron --ungron \"\$@\"" > ~/bin/ungron 
+chmod +x ~/bin/ungron
