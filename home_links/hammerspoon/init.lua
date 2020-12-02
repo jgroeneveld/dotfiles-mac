@@ -2,7 +2,6 @@ hs.loadSpoon("SpoonInstall")
 spoon.SpoonInstall.use_syncinstall = true
 Install=spoon.SpoonInstall
 
-
 -- require("spotifymenubar")
 
 
@@ -62,13 +61,40 @@ hs.hotkey.bind(appLauncher, "e", showOrLaunchApp("Rubymine"))
 hs.hotkey.bind(appLauncher, "c", showOrLaunchApp("Alacritty"))
 
 
+-- -----------------------------------------
+-- Layouts
+-- -----------------------------------------
 
+hs.hotkey.bind(appLauncher, '1', function()
+	hs.grid.setGrid("7x2")
 
+	hs.application.launchOrFocus('Google Chrome')
+	hs.application.launchOrFocus('Things')
+	hs.application.launchOrFocus('Slack')
+	hs.application.launchOrFocus('Spark')
+
+	setAppInGrid("Spotify", { 0, 0, 2, 3}) -- left
+	setAppInGrid("Slack", { 0, 0, 2, 3}) -- left
+	setAppInGrid("Spark", { 2, 0, 3, 3}) -- mid
+	setAppInGrid("Google Chrome", { 2, 0, 3, 3}) -- mid
+	setAppInGrid("Things", { 5, 0, 2, 3}) -- right
+	setAppInGrid("Sublime Text", { 5, 0, 2, 1}) -- top right
+	setAppInGrid("Alacritty", { 5, 0, 2, 1}) -- top right
+end)
 
 
 -- -----------------------------------------
 -- WindowManager
 -- -----------------------------------------
+function setAppInGrid(appname, cell)
+	local app = hs.appfinder.appFromName(appname);
+	if (app ~= nil) then
+	    hs.fnutils.each(app:allWindows(), function(win) 
+	    	hs.grid.set(win, cell)
+	    end)
+	end
+end
+
 function setGridMargins()
   hs.grid.setMargins("8,8")  
 end
