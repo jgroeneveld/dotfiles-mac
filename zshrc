@@ -1,3 +1,5 @@
+source ~/Dropbox/work-env/work-env
+
 source ~/dotfiles-mac/config/base
 source ~/dotfiles-mac/config/paths
 source ~/dotfiles-mac/config/rbenv

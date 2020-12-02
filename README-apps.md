@@ -19,6 +19,8 @@
 - hazeover - dim windows (replaced with hammerspoon)
 
 ## Secondary
+
+- `MeetingBar` - https://meetingbar.onrender.com/?utm_source=app
  
 **Via Cask**
 

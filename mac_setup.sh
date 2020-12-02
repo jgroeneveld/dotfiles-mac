@@ -101,8 +101,9 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 # Disable Creation of Metadata Files on USB Volumes
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
+defaults write com.apple.finder CreateDesktop -bool true
 # Hide all desktop icons because who need 'em'
-defaults write com.apple.finder CreateDesktop -bool false
+# defaults write com.apple.finder CreateDesktop -bool false
 
 # Show Status Bar
 defaults write com.apple.finder ShowStatusBar -bool true
