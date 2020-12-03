@@ -57,8 +57,11 @@ local function showOrLaunchApp(name)
 end
 
 hs.hotkey.bind(appLauncher, "s", showOrLaunchApp("Google Chrome"))
-hs.hotkey.bind(appLauncher, "e", showOrLaunchApp("Rubymine"))
+hs.hotkey.bind(appLauncher, "e", showOrLaunchApp("PhpStorm"))
 hs.hotkey.bind(appLauncher, "c", showOrLaunchApp("Alacritty"))
+
+hs.hotkey.bind(appLauncher, "z", showOrLaunchApp("Slack"))
+hs.hotkey.bind(appLauncher, "x", showOrLaunchApp("Spark"))
 
 
 -- -----------------------------------------
@@ -66,6 +69,8 @@ hs.hotkey.bind(appLauncher, "c", showOrLaunchApp("Alacritty"))
 -- -----------------------------------------
 
 hs.hotkey.bind(appLauncher, '1', function()
+  local windowInFocusBefore = getWin();
+
 	hs.grid.setGrid("7x2")
 
 	hs.application.launchOrFocus('Google Chrome')
@@ -75,11 +80,16 @@ hs.hotkey.bind(appLauncher, '1', function()
 
 	setAppInGrid("Spotify", { 0, 0, 2, 3}) -- left
 	setAppInGrid("Slack", { 0, 0, 2, 3}) -- left
+
 	setAppInGrid("Spark", { 2, 0, 3, 3}) -- mid
 	setAppInGrid("Google Chrome", { 2, 0, 3, 3}) -- mid
+  setAppInGrid("PhpStorm", { 2, 0, 3, 3}) -- mid
+
 	setAppInGrid("Things", { 5, 0, 2, 3}) -- right
-	setAppInGrid("Sublime Text", { 5, 0, 2, 1}) -- top right
+	setAppInGrid("Sublime Text", { 5, 0, 2, 3}) -- right
 	setAppInGrid("Alacritty", { 5, 0, 2, 1}) -- top right
+
+  windowInFocusBefore:focus();
 end)
 
 
