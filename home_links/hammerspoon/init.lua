@@ -78,16 +78,24 @@ hs.hotkey.bind(appLauncher, '1', function()
 	hs.application.launchOrFocus('Slack')
 	hs.application.launchOrFocus('Spark')
 
-	setAppInGrid("Spotify", { 0, 0, 2, 3}) -- left
-	setAppInGrid("Slack", { 0, 0, 2, 3}) -- left
+  -- left
+  setAppInGrid("WhatsApp", { 0, 0, 2, 3})
+	setAppInGrid("Spotify", { 0, 0, 2, 3})
+	setAppInGrid("Slack", { 0, 0, 2, 3})
 
-	setAppInGrid("Spark", { 2, 0, 3, 3}) -- mid
-	setAppInGrid("Google Chrome", { 2, 0, 3, 3}) -- mid
-  setAppInGrid("PhpStorm", { 2, 0, 3, 3}) -- mid
+  -- mid
+  setAppInGrid("Newton", { 2, 0, 3, 3}) 
+  setAppInGrid("HEY", { 2, 0, 3, 3})
+	setAppInGrid("Spark", { 2, 0, 3, 3})
+	setAppInGrid("Google Chrome", { 2, 0, 3, 3})
+  setAppInGrid("PhpStorm", { 2, 0, 3, 3})
 
-	setAppInGrid("Things", { 5, 0, 2, 3}) -- right
-	setAppInGrid("Sublime Text", { 5, 0, 2, 3}) -- right
-	setAppInGrid("Alacritty", { 5, 0, 2, 1}) -- top right
+  -- right
+	setAppInGrid("Things", { 5, 0, 2, 3}) 
+	setAppInGrid("Sublime Text", { 5, 0, 2, 3})
+
+  -- top right
+	setAppInGrid("Alacritty", { 5, 0, 2, 1}) 
 
   windowInFocusBefore:focus();
 end)
