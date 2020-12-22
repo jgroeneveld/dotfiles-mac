@@ -590,9 +590,9 @@ key_bindings:
 
   # (iterm like bindings sending escape sequences to tmux splitting)
   # https://arslan.io/2018/02/05/gpu-accelerated-terminal-alacritty/
-  - { key: D,        mods: Command,       chars: "\x06\x76" }   
-  - { key: D,        mods: Command|Shift, chars: "\x06\x73" }
-  - { key: W,        mods: Command,       chars: "\x06\x78" }
+  - { key: D,        mods: Command,       chars: "\x06\x76" }   # new split right
+  - { key: D,        mods: Command|Shift, chars: "\x06\x73" }   # new split down
+  - { key: W,        mods: Command,       chars: "\x06\x78" }   # close split / tab
   - { key: T,        mods: Command,       chars: "\x06\x63" }
   - { key: RBracket, mods: Command|Shift, chars: "\x06\x6e" }
   - { key: LBracket, mods: Command|Shift, chars: "\x06\x70" }
