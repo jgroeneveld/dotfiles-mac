@@ -5,26 +5,41 @@ Install=spoon.SpoonInstall
 -- require("spotifymenubar")
 
 
-
 -- -----------------------------------------
 -- Hyper Keys
 -- -----------------------------------------
 
-appLauncher = {"ctrl", "cmd"}
+local hyper = require('hyper')
+hyper.install('F18') 
+
+
+appKeys = {"ctrl", "cmd"}
 windowsDefault = {"ctrl", "alt"}
-windowsAlt = {"ctrl", "alt", "cmd"}
 
+-- -----------------------------------------
+-- App Management
+-- -----------------------------------------
 
+local am = require('app-management')
 
-
+local apps = {
+  {'s', "Google Chrome"},
+  {'e', "PhpStorm"},
+  {'c', "Alacritty"},  
+  {'z', "Slack"},  
+  {'x', "Spark"},  
+  {'p', "Spotify"}
+}
+for i, app in ipairs(apps) do
+  hs.hotkey.bind(appKeys, app[1], function() am.switchToAndFromApp(app[2]) end)
+end
 
 
 -- -----------------------------------------
 -- Reduce screen brightness if needed
 -- -----------------------------------------
 
-Install:andUse('Shade')
-
+-- Install:andUse('Shade')
 
 
 
@@ -42,76 +57,41 @@ Install:andUse('Shade')
 -- )
 
 
-
-
-
-
--- -----------------------------------------
--- App Launcher
--- -----------------------------------------
-
-local function showOrLaunchApp(name)
-  return function()
-    hs.application.launchOrFocus(name)
-  end
-end
-
-hs.hotkey.bind(appLauncher, "s", showOrLaunchApp("Google Chrome"))
-hs.hotkey.bind(appLauncher, "e", showOrLaunchApp("PhpStorm"))
-hs.hotkey.bind(appLauncher, "c", showOrLaunchApp("Alacritty"))
-
-hs.hotkey.bind(appLauncher, "z", showOrLaunchApp("Slack"))
-hs.hotkey.bind(appLauncher, "x", showOrLaunchApp("Spark"))
-
-
 -- -----------------------------------------
 -- Layouts
 -- -----------------------------------------
 
-hs.hotkey.bind(appLauncher, '1', function()
-  local windowInFocusBefore = getWin();
+local wm = require('window-management')
 
-	hs.grid.setGrid("7x2")
-
-	hs.application.launchOrFocus('Google Chrome')
-	hs.application.launchOrFocus('Things')
-	hs.application.launchOrFocus('Slack')
-	hs.application.launchOrFocus('Spark')
-
-  -- left
-  setAppInGrid("WhatsApp", { 0, 0, 2, 3})
-	setAppInGrid("Spotify", { 0, 0, 2, 3})
-	setAppInGrid("Slack", { 0, 0, 2, 3})
-
-  -- mid
-  setAppInGrid("Newton", { 2, 0, 3, 3}) 
-  setAppInGrid("HEY", { 2, 0, 3, 3})
-	setAppInGrid("Spark", { 2, 0, 3, 3})
-	setAppInGrid("Google Chrome", { 2, 0, 3, 3})
-  setAppInGrid("PhpStorm", { 2, 0, 3, 3})
-
-  -- right
-	setAppInGrid("Things", { 5, 0, 2, 3}) 
-	setAppInGrid("Sublime Text", { 5, 0, 2, 3})
-
-  -- top right
-	setAppInGrid("Alacritty", { 5, 0, 2, 1}) 
-
-  windowInFocusBefore:focus();
+hyper.bindKey('1', function()
+  wm.gridLayout({
+    grid = "7x2",
+    launch = {
+      "Google Chrome",
+      "Things",
+      "Slack",
+      "Spark"
+    },
+    layout = {
+      { "WhatsApp", wm.gridLeft},
+      { "Spotify", wm.gridLeft},
+      { "Slack", wm.gridLeft},
+      { "Newton", wm.gridMid},
+      { "HEY", wm.gridMid},
+      { "Spark", wm.gridMid},
+      { "Google Chrome", wm.gridMid},
+      { "PhpStorm", wm.gridMid},
+      { "Things", wm.gridRight},
+      { "Sublime Text", wm.gridRight},
+      { "Alacritty", wm.gridTopRight}
+    }
+  })
 end)
-
 
 -- -----------------------------------------
 -- WindowManager
 -- -----------------------------------------
-function setAppInGrid(appname, cell)
-	local app = hs.appfinder.appFromName(appname);
-	if (app ~= nil) then
-	    hs.fnutils.each(app:allWindows(), function(win) 
-	    	hs.grid.set(win, cell)
-	    end)
-	end
-end
+
 
 function setGridMargins()
   hs.grid.setMargins("8,8")  
@@ -121,21 +101,11 @@ function unsetGridMargins()
   hs.grid.setMargins("0,0")  
 end
 
-function maximizeWindow()
-  unsetGridMargins()
-  hs.grid.maximizeWindow()
-  setGridMargins()
-end
-
-function getWin()
-  return hs.window.focusedWindow()
-end
-
 function setFullGrid(gridSize, cell) 
   return function()
     unsetGridMargins() 
     hs.grid.setGrid(gridSize)
-    hs.grid.set(getWin(), cell)
+    hs.grid.set(hs.window.focusedWindow(), cell)
     setGridMargins()
   end
 end
@@ -143,16 +113,7 @@ end
 function setGrid(gridSize, cell) 
   return function() 
     hs.grid.setGrid(gridSize)
-    hs.grid.set(getWin(), cell)
-  end
-end
-
-function alignAllToGrid()
-  return function()
-    hs.grid.setGrid('7x2')
-    hs.fnutils.each(hs.window.visibleWindows(), function(win) 
-        hs.grid.snap(win)
-    end)
+    hs.grid.set(hs.window.focusedWindow(), cell)
   end
 end
 
@@ -161,51 +122,37 @@ hs.window.animationDuration = 0.1
 
 -- WindowManager: General 
 
-hs.hotkey.bind(windowsAlt, "return", maximizeWindow)
-hs.hotkey.bind(windowsAlt, "delete", alignAllToGrid())
-hs.hotkey.bind(windowsAlt, "space", function() local win = getWin(); win:moveToScreen(win:screen():next()) end)
-hs.hotkey.bind(windowsAlt, "left", function() getWin():moveOneScreenWest() end)
-hs.hotkey.bind(windowsAlt, "right", function() getWin():moveOneScreenEast() end)
+hyper.bindKey("up", wm.maximizeWindow)
+hyper.bindKey("delete", wm.alignAllToGrid)
 
 -- WindowManager: 2x2 Grid
 
-hs.hotkey.bind(windowsDefault, "left", setFullGrid('2x2', {0, 0, 1, 2}))
-hs.hotkey.bind(windowsDefault, "right", setFullGrid('2x2', {1, 0, 1, 2}))
+hyper.bindKey("left", wm.setHalfFrameLeft)
+hyper.bindKey("right", wm.setHalfFrameRight)
 
--- WindowManager: 3x2 Grid
+-- WindowManager: 7x2 Gridf
 
-hs.hotkey.bind(windowsAlt, "q", setGrid('3x2', {0, 0, 1, 1}))
-hs.hotkey.bind(windowsAlt, "a", setGrid('3x2', {0, 0, 1, 3}))
-hs.hotkey.bind(windowsAlt, "z", setGrid('3x2', {0, 2, 1, 1}))
+hyper.bindKey("q", setGrid('7x2', wm.gridTopLeft))
+hyper.bindKey("a", setGrid('7x2', wm.gridLeft))
+hyper.bindKey("z", setGrid('7x2', wm.gridBottomLeft))
 
-hs.hotkey.bind(windowsAlt, "w", setGrid('3x2', {1, 0, 1, 1}))
-hs.hotkey.bind(windowsAlt, "s", setGrid('3x2', {1, 0, 1, 3}))
-hs.hotkey.bind(windowsAlt, "x", setGrid('3x2', {1, 2, 1, 1}))
+hyper.bindKey("w", setGrid('7x2', wm.gridTopMid))
+hyper.bindKey("s", setGrid('7x2', wm.gridMid))
+hyper.bindKey("x", setGrid('7x2', wm.gridBottomMid))
 
-hs.hotkey.bind(windowsAlt, "e", setGrid('3x2', {2, 0, 1, 1}))
-hs.hotkey.bind(windowsAlt, "d", setGrid('3x2', {2, 0, 1, 3}))
-hs.hotkey.bind(windowsAlt, "c", setGrid('3x2', {2, 2, 1, 1}))
+hyper.bindKey("e", setGrid('7x2', wm.gridTopRight))
+hyper.bindKey("d", setGrid('7x2', wm.gridRight))
+hyper.bindKey("c", setGrid('7x2', wm.gridBottomRight))
 
--- WindowManager: 7x2 Grid
-
-hs.hotkey.bind(windowsDefault, "q", setGrid('7x2', { 0, 0, 2, 1}))
-hs.hotkey.bind(windowsDefault, "a", setGrid('7x2', { 0, 0, 2, 3}))
-hs.hotkey.bind(windowsDefault, "z", setGrid('7x2', { 0, 2, 2, 1}))
-
-hs.hotkey.bind(windowsDefault, "w", setGrid('7x2', { 2, 0, 3, 1}))
-hs.hotkey.bind(windowsDefault, "s", setGrid('7x2', { 2, 0, 3, 3}))
-hs.hotkey.bind(windowsDefault, "x", setGrid('7x2', { 2, 2, 3, 1}))
-
-hs.hotkey.bind(windowsDefault, "e", setGrid('7x2', { 5, 0, 2, 1}))
-hs.hotkey.bind(windowsDefault, "d", setGrid('7x2', { 5, 0, 2, 3}))
-hs.hotkey.bind(windowsDefault, "c", setGrid('7x2', { 5, 2, 2, 1}))
-
-hs.hotkey.bind(windowsDefault, "m", setGrid('7x2', { 1, 0, 5, 3}))
+hyper.bindKey("u", function() hs.grid.show() end)
+hyper.bindKey("j", setGrid('7x2', wm.gridOversizeLeft))
+hyper.bindKey("k", setGrid('7x2', wm.gridOversizeMid))
+hyper.bindKey("l", setGrid('7x2', wm.gridOversizeRight))
 
 -- WindowManager: Special window sizes
 
 hs.urlevent.bind("window1920x1080", function(eventName, params)
-  local win = getWin()
+  local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local frame = screen:frame()
@@ -218,7 +165,7 @@ hs.urlevent.bind("window1920x1080", function(eventName, params)
 end)
 
 hs.urlevent.bind("window1280x720", function(eventName, params)
-  local win = getWin()
+  local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local frame = screen:frame()
@@ -229,4 +176,3 @@ hs.urlevent.bind("window1280x720", function(eventName, params)
   f.h = 720
   win:setFrame(f)
 end)
-
