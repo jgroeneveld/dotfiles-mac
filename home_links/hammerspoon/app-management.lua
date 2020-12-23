@@ -1,4 +1,4 @@
--- AppManagement originally by jqno
+-- AppManagement originally by jqno, modified by Jaap
 
 local This = {}
 
@@ -37,6 +37,12 @@ function This.switchToAndFromApp(name)
   else
     previousApp = focusedWindow:application()
     hs.application.launchOrFocus(name)
+  end
+end
+
+function This.bindSwitchToAndFromApps(modifiers, apps)
+  for i, app in ipairs(apps) do
+    hs.hotkey.bind(modifiers, app[1], function() This.switchToAndFromApp(app[2]) end)
   end
 end
 

@@ -1,8 +1,6 @@
-hs.loadSpoon("SpoonInstall")
-spoon.SpoonInstall.use_syncinstall = true
-Install=spoon.SpoonInstall
-
--- require("spotifymenubar")
+-- hs.loadSpoon("SpoonInstall")
+-- spoon.SpoonInstall.use_syncinstall = true
+-- Install=spoon.SpoonInstall
 
 
 -- -----------------------------------------
@@ -10,11 +8,10 @@ Install=spoon.SpoonInstall
 -- -----------------------------------------
 
 local hyper = require('hyper')
-hyper.install('F18') 
 
+hyper.install('F18') -- capslock with karabiner
+local appKeys = {"ctrl", "cmd"}
 
-appKeys = {"ctrl", "cmd"}
-windowsDefault = {"ctrl", "alt"}
 
 -- -----------------------------------------
 -- App Management
@@ -22,50 +19,59 @@ windowsDefault = {"ctrl", "alt"}
 
 local am = require('app-management')
 
-local apps = {
+am.bindSwitchToAndFromApps(appKeys, {
   {'s', "Google Chrome"},
   {'e', "PhpStorm"},
   {'c', "Alacritty"},  
   {'z', "Slack"},  
   {'x', "Spark"},  
   {'p', "Spotify"}
-}
-for i, app in ipairs(apps) do
-  hs.hotkey.bind(appKeys, app[1], function() am.switchToAndFromApp(app[2]) end)
-end
+})
 
 
 -- -----------------------------------------
--- Reduce screen brightness if needed
--- -----------------------------------------
-
--- Install:andUse('Shade')
-
-
-
-
--- -----------------------------------------
--- MicMute
--- -----------------------------------------
-
--- Install:andUse('MicMute')
--- spoon.MicMute:bindHotkeys(
---   {
---     toggle = {{"cmd", "alt"}, "m"}
---   },
---   0.75
--- )
-
-
--- -----------------------------------------
--- Layouts
+-- WindowManager
 -- -----------------------------------------
 
 local wm = require('window-management')
 
+hs.grid.setGrid('7x2')
+hs.grid.setMargins("8,8")
+hs.window.animationDuration = 0.1
+
+-- WindowManager: General 
+
+hyper.bindKey("up", wm.maximizeWindow)
+hyper.bindKey("delete", wm.alignAllToGrid)
+
+-- WindowManager: 2x2 Grid
+
+hyper.bindKey("left", wm.setHalfFrameLeft)
+hyper.bindKey("right", wm.setHalfFrameRight)
+
+-- WindowManager: 7x2 Grid
+
+hyper.bindKey("q", wm.setGridFn(wm.gridTopLeft))
+hyper.bindKey("a", wm.setGridFn(wm.gridLeft))
+hyper.bindKey("z", wm.setGridFn(wm.gridBottomLeft))
+
+hyper.bindKey("w", wm.setGridFn(wm.gridTopMid))
+hyper.bindKey("s", wm.setGridFn(wm.gridMid))
+hyper.bindKey("x", wm.setGridFn(wm.gridBottomMid))
+
+hyper.bindKey("e", wm.setGridFn(wm.gridTopRight))
+hyper.bindKey("d", wm.setGridFn(wm.gridRight))
+hyper.bindKey("c", wm.setGridFn(wm.gridBottomRight))
+
+hyper.bindKey("u", function() hs.grid.show() end)
+hyper.bindShiftKey("left", wm.setGridFn(wm.gridOversizeLeft))
+hyper.bindShiftKey("up", wm.setGridFn(wm.gridOversizeMid))
+hyper.bindShiftKey("right", wm.setGridFn(wm.gridOversizeRight))
+
+-- WindowManager: Layouts
+
 hyper.bindKey('1', function()
   wm.gridLayout({
-    grid = "7x2",
     launch = {
       "Google Chrome",
       "Things",
@@ -88,91 +94,12 @@ hyper.bindKey('1', function()
   })
 end)
 
--- -----------------------------------------
--- WindowManager
--- -----------------------------------------
-
-
-function setGridMargins()
-  hs.grid.setMargins("8,8")  
-end
-
-function unsetGridMargins()
-  hs.grid.setMargins("0,0")  
-end
-
-function setFullGrid(gridSize, cell) 
-  return function()
-    unsetGridMargins() 
-    hs.grid.setGrid(gridSize)
-    hs.grid.set(hs.window.focusedWindow(), cell)
-    setGridMargins()
-  end
-end
-
-function setGrid(gridSize, cell) 
-  return function() 
-    hs.grid.setGrid(gridSize)
-    hs.grid.set(hs.window.focusedWindow(), cell)
-  end
-end
-
-setGridMargins()
-hs.window.animationDuration = 0.1
-
--- WindowManager: General 
-
-hyper.bindKey("up", wm.maximizeWindow)
-hyper.bindKey("delete", wm.alignAllToGrid)
-
--- WindowManager: 2x2 Grid
-
-hyper.bindKey("left", wm.setHalfFrameLeft)
-hyper.bindKey("right", wm.setHalfFrameRight)
-
--- WindowManager: 7x2 Gridf
-
-hyper.bindKey("q", setGrid('7x2', wm.gridTopLeft))
-hyper.bindKey("a", setGrid('7x2', wm.gridLeft))
-hyper.bindKey("z", setGrid('7x2', wm.gridBottomLeft))
-
-hyper.bindKey("w", setGrid('7x2', wm.gridTopMid))
-hyper.bindKey("s", setGrid('7x2', wm.gridMid))
-hyper.bindKey("x", setGrid('7x2', wm.gridBottomMid))
-
-hyper.bindKey("e", setGrid('7x2', wm.gridTopRight))
-hyper.bindKey("d", setGrid('7x2', wm.gridRight))
-hyper.bindKey("c", setGrid('7x2', wm.gridBottomRight))
-
-hyper.bindKey("u", function() hs.grid.show() end)
-hyper.bindKey("j", setGrid('7x2', wm.gridOversizeLeft))
-hyper.bindKey("k", setGrid('7x2', wm.gridOversizeMid))
-hyper.bindKey("l", setGrid('7x2', wm.gridOversizeRight))
-
 -- WindowManager: Special window sizes
 
 hs.urlevent.bind("window1920x1080", function(eventName, params)
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local frame = screen:frame()
-
-  f.x = frame.x + frame.w/2 - 1920/2
-  f.y = frame.y + frame.h/2 - 1080/2
-  f.w = 1920
-  f.h = 1080
-  win:setFrame(f)
+  wm.resizeCentered(1920, 1080)
 end)
 
 hs.urlevent.bind("window1280x720", function(eventName, params)
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local frame = screen:frame()
-
-  f.x = frame.x + frame.w/2 - 1280/2
-  f.y = frame.y + frame.h/2 - 720/2
-  f.w = 1280
-  f.h = 720
-  win:setFrame(f)
+  wm.resizeCentered(1280, 720)
 end)

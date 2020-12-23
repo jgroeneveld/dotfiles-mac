@@ -5,7 +5,6 @@ local This = {}
 function This.gridLayout(config)
   local windowInFocusBefore = hs.window.focusedWindow();
 
-  hs.grid.setGrid(config.grid)
   This.alignAllToGrid()
 
   for i, app in ipairs(config.launch) do
@@ -64,6 +63,25 @@ function This.setHalfFrameRight()
   f.w = max.w / 2
   f.h = max.h
   win:setFrame(f)
+end
+
+function This.resizeCentered(width, height)
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local frame = screen:frame()
+
+  f.x = frame.x + frame.w/2 - width/2
+  f.y = frame.y + frame.h/2 - height/2
+  f.w = width
+  f.h = height
+  win:setFrame(f)
+end
+
+function This.setGridFn(cell) 
+  return function()
+    hs.grid.set(hs.window.focusedWindow(), cell)
+  end
 end
 
 This.gridLeft = { 0, 0, 2, 3}
