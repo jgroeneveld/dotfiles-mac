@@ -22,7 +22,7 @@ local am = require('app-management')
 am.bindSwitchToAndFromApps(appKeys, {
   {'s', "Google Chrome"},
   {'e', "PhpStorm"},
-  {'m', "Sublime Merge"},
+  {'g', "Sublime Merge"},
   {'c', "Alacritty"},  
   {'z', "Slack"},  
   {'x', "Spark"},  
@@ -38,7 +38,7 @@ local wm = require('window-management')
 
 hs.grid.setGrid('7x2')
 hs.grid.setMargins("8,8")
-hs.window.animationDuration = 0.1
+hs.window.animationDuration = 0
 
 -- WindowManager: General 
 
