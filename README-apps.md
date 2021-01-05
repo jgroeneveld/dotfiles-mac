@@ -30,6 +30,10 @@
 - `adobe-creative-cloud`
 - `docker`
 
+## Interesting
+
+- Bandwidth+ (App Store, track usage)
+
 
 ## Old ones
 
