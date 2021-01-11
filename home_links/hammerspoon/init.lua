@@ -26,7 +26,8 @@ am.bindSwitchToAndFromApps(appKeys, {
   {'c', "Alacritty"},  
   {'z', "Slack"},  
   {'x', "Spark"},  
-  {'p', "Spotify"}
+  {'p', "Spotify"},
+  {'m', "Things3"}
 })
 
 
@@ -75,7 +76,7 @@ hyper.bindKey('1', function()
   wm.gridLayout({
     launch = {
       "Google Chrome",
-      "Things",
+      "Things3",
       "Slack",
       "Spark"
     },
@@ -88,11 +89,34 @@ hyper.bindKey('1', function()
       { "Spark", wm.gridMid},
       { "Google Chrome", wm.gridMid},
       { "PhpStorm", wm.gridMid},
-      { "Things", wm.gridRight},
+      { "com.culturedcode.ThingsMac", wm.gridRight},
       { "Sublime Text", wm.gridRight},
       { "Alacritty", wm.gridTopRight}
     }
   })
+
+  hs.alert.show("Arbeit Arbeit !!", { textSize  = 50, })
+end)
+
+hyper.bindKey('p', function()
+  am.showBundleId()
+end)
+
+hyper.bindKey('2', function()
+  am.killApps({
+    "com.tinyspeck.slackmacgap",
+    "Spark",
+    "Spotify",
+    "PhpStorm",
+    "com.culturedcode.ThingsMac",
+    "Bear",
+    "Sublime Text",
+    -- "Code",
+    "Agenda",
+    "Alacritty"
+  })
+
+  hs.alert.show("Feierabend !!", { textSize  = 50, })
 end)
 
 -- WindowManager: Special window sizes

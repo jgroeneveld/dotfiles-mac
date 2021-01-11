@@ -6,6 +6,16 @@ local This = {}
 -- (Thanks Teije)
 local previousApp = ""
 
+function This.showBundleId()
+  local focusedWindow = hs.window.focusedWindow()
+
+  if focusedWindow == nil then
+    hs.alert.show("No window")
+  else 
+    hs.alert.show(focusedWindow:application():bundleID())
+  end
+end
+
 -- function This.switchToAndFromApp(bundleID)
 --   local focusedWindow = hs.window.focusedWindow()
 
@@ -46,5 +56,13 @@ function This.bindSwitchToAndFromApps(modifiers, apps)
   end
 end
 
+function This.killApps(apps)
+  for i, appname in ipairs(apps) do
+    local app = hs.application.find(appname)
+    if(app ~= nil) then
+      app:kill()
+    end
+  end
+end
 
 return This
