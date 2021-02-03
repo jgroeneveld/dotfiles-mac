@@ -7,10 +7,9 @@
 3. Install https://github.com/robbyrussell/oh-my-zsh
 4. Run `./install_minimum_tools`
 5. Run `./init_home_links`
-
-## Mac Apps
-
-See [README-apps.md](README-apps.md)
+6. Run `./install_brew_apps`
+7. Run `./mac_setup`
+8. Check [README-apps.md](README-apps.md)
 
 ## Used Tools
 
