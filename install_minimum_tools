@@ -1,6 +1,6 @@
 #!/bin/sh
 
-brew install git fasd tig legit
+brew install git fasd tig legit tmux micro
 
 brew install fzf
 $(brew --prefix)/opt/fzf/install

@@ -18,8 +18,8 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "Moin!"
 
 # Play iOS charging sound when MagSafe is connected.
-defaults write com.apple.PowerChime ChimeOnAllHardware -bool true && \
-open /System/Library/CoreServices/PowerChime.app
+# defaults write com.apple.PowerChime ChimeOnAllHardware -bool true && \
+# open /System/Library/CoreServices/PowerChime.app
 
 
 # Mail
@@ -115,8 +115,8 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 # ==============
 
 # Auto-Correct Enable (Default)
-defaults write -g NSAutomaticSpellingCorrectionEnabled -bool true
-defaults write -g WebAutomaticTextReplacementEnabled -bool true
+# defaults write -g NSAutomaticSpellingCorrectionEnabled -bool true
+# defaults write -g WebAutomaticTextReplacementEnabled -bool true
 
 
 # Enable Key Repeat
@@ -148,7 +148,7 @@ defaults write com.apple.dock dashboard-in-overlay -bool true
 defaults write com.apple.dock autohide -bool true
 
 # Set icon size
-defaults write com.apple.dock tilesize -int 30
+defaults write com.apple.dock tilesize -int 40
 
 # Lock the Dock Size
 defaults write com.apple.Dock size-immutable -bool yes && killall Dock
@@ -158,7 +158,7 @@ defaults write com.apple.Dock size-immutable -bool yes && killall Dock
 # ==============
 
 # Increase sound quality for Bluetooth headphones/headsets
-defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+# defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
 
 # Disable Dashboard
 defaults write com.apple.dashboard mcx-disabled -bool true
