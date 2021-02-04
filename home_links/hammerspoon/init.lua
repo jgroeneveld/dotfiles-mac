@@ -19,7 +19,7 @@ local appKeys = {"ctrl", "cmd"}
 
 local am = require('app-management')
 
-am.bindSwitchToAndFromApps(appKeys, {
+am.bindSwitchToApps(appKeys, {
   {'s', "Google Chrome"},
   {'e', "PhpStorm"},
   {'g', "Sublime Merge"},

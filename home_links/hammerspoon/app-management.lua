@@ -56,6 +56,16 @@ function This.bindSwitchToAndFromApps(modifiers, apps)
   end
 end
 
+function This.switchToApp(name)  
+    hs.application.launchOrFocus(name)
+end
+
+function This.bindSwitchToApps(modifiers, apps)
+  for i, app in ipairs(apps) do
+    hs.hotkey.bind(modifiers, app[1], function() This.switchToApp(app[2]) end)
+  end
+end
+
 function This.killApps(apps)
   for i, appname in ipairs(apps) do
     local app = hs.application.find(appname)
