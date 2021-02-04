@@ -81,14 +81,11 @@ class Linker
   linker = Linker.new(ENV['SIMULATE'])
   
   linker.link_all_files_in_dir("home_links", "~", ".")
+
   
-#   linker.link_hash({
-#     "vim/colors" => "~/.vim/colors/",
-#     "vim/UltiSnips" => "~/.vim/UltiSnips/",
-#     "vim/bundle.vim" => "~/.vim/bundle.vim",
-#     "vim/vimrc" => "~/.vimrc",
-#     "vim/gvimrc" => "~/.gvimrc"
-#   })
+  linker.link_hash({
+    "more_links/karabiner" => "~/.config/karabiner/"
+  })
   
   
   puts "\n\nDone."
