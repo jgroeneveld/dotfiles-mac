@@ -4,4 +4,4 @@ ZSH_CUSTOM=~/dotfiles-mac/ohmyzsh/custom
 
 ZSH_THEME="jgroeneveld"
 
-plugins=()
+plugins=(docker)

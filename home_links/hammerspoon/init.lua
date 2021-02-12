@@ -1,6 +1,14 @@
--- hs.loadSpoon("SpoonInstall")
--- spoon.SpoonInstall.use_syncinstall = true
--- Install=spoon.SpoonInstall
+hs.loadSpoon("SpoonInstall")
+spoon.SpoonInstall.use_syncinstall = true
+Install=spoon.SpoonInstall
+
+
+-- -----------------------------------------
+-- Reduce screen brightness if needed
+-- -----------------------------------------
+
+
+Install:andUse('Shade')
 
 
 -- -----------------------------------------
