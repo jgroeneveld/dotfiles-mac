@@ -4,3 +4,5 @@ brew install git fasd tig legit tmux micro
 
 brew install fzf
 $(brew --prefix)/opt/fzf/install
+
+brew install rbenv

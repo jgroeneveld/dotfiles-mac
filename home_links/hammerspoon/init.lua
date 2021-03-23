@@ -29,7 +29,7 @@ local am = require('app-management')
 
 am.bindSwitchToApps(appKeys, {
   {'s', "Google Chrome"},
-  {'e', "PhpStorm"},
+  {'e', "Visual Studio Code"},
   {'g', "Sublime Merge"},
   {'c', "Alacritty"},  
   {'z', "Slack"},  

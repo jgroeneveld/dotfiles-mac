@@ -14,9 +14,9 @@
 - `alfred` search
 - `hammerspoon` desktop automation. see ./home_links/hammerspoon for config
 - `easy-move-plus-resize` [move/resize window with modifier](https://github.com/dmarcotte/easy-move-resize)
-- quickshade - dim full screen for external display
+- quickshade - dim full screen for external display (replaced with hammerspoon shade)
 - steermouse - mouse settings (import misc config/smsetting_app file)
-- hazeover - dim windows (replaced with hammerspoon)
+- hazeover - dim windows (maybe replace with hammerspoon hs.window.highlight (isolate))
 
 ## Secondary
 
