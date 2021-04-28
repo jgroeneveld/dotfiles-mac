@@ -5,7 +5,7 @@ local This = {}
 function This.gridLayout(config)
   local windowInFocusBefore = hs.window.focusedWindow();
 
-  This.alignAllToGrid()
+  This.alignAllToGrid(config.gridDimensions)
 
   for i, app in ipairs(config.launch) do
     hs.application.launchOrFocus(app)
@@ -27,8 +27,8 @@ function This.setAppInGrid(appname, cell)
 	end
 end
 
-function This.alignAllToGrid()
-	hs.grid.setGrid('7x2')
+function This.alignAllToGrid(dimensions)
+	hs.grid.setGrid(dimensions)
 	hs.fnutils.each(hs.window.visibleWindows(), function(win) 
 	    hs.grid.snap(win)
 	end)
@@ -83,6 +83,48 @@ function This.setGridFn(cell)
     hs.grid.set(hs.window.focusedWindow(), cell)
   end
 end
+
+This.gridSmall = {
+  dimensions = "2x2",
+  
+  leftCell = { 0, 0, 1, 2},
+  midCell = { 0, 0, 2, 2},
+  rightCell = { 1, 0, 1, 2},
+
+  topLeftCell = { 0, 0, 1, 1},
+  bottomLeftCell = { 0, 1, 1, 1},
+
+  topMidCell = { 0, 0, 2, 1},
+  bottomMidCell = { 0, 1, 2, 1},
+
+  topRightCell = { 1, 0, 1, 1},
+  bottomRightCell = { 1, 1, 1, 1},
+
+  oversizeLeftCell = "none",
+  oversizeMidCell = "none",
+  oversizeRightCell = "none",
+}
+
+This.gridBig = {
+  dimensions = "7x2",
+
+  leftCell = { 0, 0, 2, 3},
+  midCell = { 2, 0, 3, 3},
+  rightCell = { 5, 0, 2, 3},
+
+  topLeftCell = { 0, 0, 2, 1},
+  bottomLeftCell = { 0, 2, 2, 1},
+
+  topMidCell = { 2, 0, 3, 1},
+  bottomMidCell = { 2, 2, 3, 1},
+
+  topRightCell = { 5, 0, 2, 1},
+  bottomRightCell = { 5, 2, 2, 1},
+
+  oversizeLeftCell = { 0, 0, 5, 3},
+  oversizeMidCell = { 1, 0, 5, 3},
+  oversizeRightCell = { 2, 0, 5, 3},
+}
 
 This.gridLeft = { 0, 0, 2, 3}
 This.gridMid = { 2, 0, 3, 3}

@@ -44,34 +44,35 @@ am.bindSwitchToApps(appKeys, {
 -- -----------------------------------------
 
 local wm = require('window-management')
+local grid = wm.gridSmall;
 
-hs.grid.setGrid('7x2')
-hs.grid.setMargins("8,8")
+hs.grid.setGrid(grid.dimensions)
+hs.grid.setMargins("4,4")
 hs.window.animationDuration = 0
 
 -- WindowManager: General 
 
 hyper.bindKey("up", wm.maximizeWindow)
-hyper.bindKey("delete", wm.alignAllToGrid)
+hyper.bindKey("delete", function() wm.alignAllToGrid(grid.dimensions) end)
 
 -- WindowManager: 2x2 Grid
 
+-- hyper.bindKey("up", wm.maximizeWindow)
 hyper.bindKey("left", wm.setHalfFrameLeft)
 hyper.bindKey("right", wm.setHalfFrameRight)
 
 -- WindowManager: 7x2 Grid
+hyper.bindKey("q", wm.setGridFn(grid.topLeftCell))
+hyper.bindKey("a", wm.setGridFn(grid.leftCell))
+hyper.bindKey("z", wm.setGridFn(grid.bottomLeftCell))
 
-hyper.bindKey("q", wm.setGridFn(wm.gridTopLeft))
-hyper.bindKey("a", wm.setGridFn(wm.gridLeft))
-hyper.bindKey("z", wm.setGridFn(wm.gridBottomLeft))
+hyper.bindKey("w", wm.setGridFn(grid.topMidCell))
+hyper.bindKey("s", wm.setGridFn(grid.midCell))
+hyper.bindKey("x", wm.setGridFn(grid.bottomMidCell))
 
-hyper.bindKey("w", wm.setGridFn(wm.gridTopMid))
-hyper.bindKey("s", wm.setGridFn(wm.gridMid))
-hyper.bindKey("x", wm.setGridFn(wm.gridBottomMid))
-
-hyper.bindKey("e", wm.setGridFn(wm.gridTopRight))
-hyper.bindKey("d", wm.setGridFn(wm.gridRight))
-hyper.bindKey("c", wm.setGridFn(wm.gridBottomRight))
+hyper.bindKey("e", wm.setGridFn(grid.topRightCell))
+hyper.bindKey("d", wm.setGridFn(grid.rightCell))
+hyper.bindKey("c", wm.setGridFn(grid.bottomRightCell))
 
 hyper.bindKey("u", function() hs.grid.show() end)
 hyper.bindShiftKey("left", wm.setGridFn(wm.gridOversizeLeft))
@@ -82,6 +83,7 @@ hyper.bindShiftKey("right", wm.setGridFn(wm.gridOversizeRight))
 
 hyper.bindKey('1', function()
   wm.gridLayout({
+    gridDimensions = grid.dimensions,
     launch = {
       "Google Chrome",
       "Things3",
