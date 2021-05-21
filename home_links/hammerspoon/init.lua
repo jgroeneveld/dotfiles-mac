@@ -47,7 +47,8 @@ local wm = require('window-management')
 local grid = wm.gridSmall;
 
 hs.grid.setGrid(grid.dimensions)
-hs.grid.setMargins("4,4")
+-- hs.grid.setMargins("4,4")
+hs.grid.setMargins("0,0")
 hs.window.animationDuration = 0
 
 -- WindowManager: General 

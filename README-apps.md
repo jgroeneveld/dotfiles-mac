@@ -29,6 +29,7 @@
 - `adoptopenjdk` jvm
 - `adobe-creative-cloud`
 - `docker`
+- `Dozer` - https://github.com/Mortennn/Dozer (hide macbar icons)
 
 ## Interesting
 

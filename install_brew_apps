@@ -2,3 +2,4 @@
  
 brew install --cask 1password alacritty alfred hammerspoon MeetingBar karabiner-elements steermouse
 brew install --cask sublime-text
+brew install --cask dozer
